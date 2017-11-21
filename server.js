@@ -14,6 +14,8 @@ var PORT = process.env.PORT || 3000;
 
 var app = express();
 
+var MONGODB_URI = process.env.MONDODB_URI || "mongodb://localhost/News_Scraper";
+
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -24,7 +26,7 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/News_Scraper", {
+mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
 
