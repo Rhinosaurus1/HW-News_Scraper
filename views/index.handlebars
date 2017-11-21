@@ -1,0 +1,88 @@
+
+  {{#each articles}}
+
+  <div class="card">
+    <div class="card-header" role="tab">
+    <ul class="list-inline">
+        <li class="list-inline-item">
+          <h4><a class="article-link" target="_blank" href="{{link}}">{{title}}</a></h4>
+        </li>
+        <li class="list-inline-item btnList">
+          <form id = "saveBtn-{{_id}}" action="save/article/{{_id}}" method="GET">
+             <button type="submit" data-id="{{_id}} value="Save" class="btn btn-success save-article-btn">Save Article</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <div class="card-header">
+        <p>{{summary}}</p>
+    </div>
+
+  </div>
+  <br>
+  {{/each}}
+
+
+  {{#each saved}}
+
+  <div class="card">
+    <div class="card-header" role="tab">
+    <ul class="list-inline">
+        <li class="list-inline-item">
+          <h4><a class="article-link" target="_blank" href="{{link}}">{{title}}</a></h4>
+        </li>
+        <li class="list-inline-item btnList">
+          <a data-toggle="collapse" href="#collapse-1-{{_id}}" aria-expanded="false" class="collapsed btn btn-info">Add a Note</a>
+        </li>
+        <li class="list-inline-item btnList">
+          <a data-toggle="collapse" href="#collapse-2-{{_id}}" aria-expanded="false" class="collapsed btn btn-primary">View Notes</a>
+        </li>
+        <li class="list-inline-item btnList">
+          <form id = "removeSave-{{_id}}" action="remove/article/{{_id}}" method="GET">
+             <button type="submit" data-id="{{_id}} value="Remove" class="btn btn-warning remove-article-btn">Remove Article</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <div class="card-header">
+        <p>{{summary}}</p>
+    </div>
+
+
+    <div id="collapse-1-{{_id}}" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-header">
+        <form id="form-add-{{_id}}" action="add/note/{{_id}}" method="post" class="form-row">
+          <div class="col-md-10">
+            <label for="noteArea" class="sr-only"></label>
+            <textarea class="form-control" name="note" rows="4" placeholder="Note"></textarea>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" data-id="{{_id}}" value="submit" class="btn btn-success add-note-btn">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div id="collapse-2-{{_id}}" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+      
+      {{#if notes}}
+        {{#each notes}}
+        <div class="card-body">
+          <p>{{content}}</p>
+          <form id = "form-delete-{{_id}}" action="remove/note/{{_id}}" method="post">
+             <button type="submit" data-id="{{_id}} value="Delete" class="btn btn-danger delete-note-btn">Delete Note</button>
+          </form>
+        </div>
+        {{/each}}
+      {{else}}
+        <div class="card-body">
+          <p>No Notes Yet.</p>
+        </div>
+      {{/if}}
+    </div>
+    <hr>
+
+  </div>
+  <br>
+  {{/each}}

@@ -1,0 +1,8 @@
+body{
+	background-image: url("../images/grey_wash_wall.png");
+}
+
+.btnList{
+	float: right;
+	margin: 10px;
+}
